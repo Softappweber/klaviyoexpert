@@ -247,8 +247,11 @@
     time: new Date().toISOString()
   };
 
+  <!-- ===== TRACKER - WITH CORS FIX ===== -->
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUw3lK6TS9s2TBMKTg7hha9tSS_pHinLgU1vOEKlGtPNMUQV-zSyKXA3m0rF97N7RKZw/exec';
+  
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'YOUR_NEW_URL_HERE', true);
+  xhr.open('POST', SCRIPT_URL, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   
   xhr.onload = function() {
