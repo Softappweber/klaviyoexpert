@@ -234,36 +234,45 @@
   </script>
 
   <!-- ===== TRACKER - WORKING VERSION ===== -->
-  <script>
-    (function() {
-      const data = {
-        page: 'klaviyoexpert',
-        email: 'softappweber@gmail.com',
-        url: window.location.href,
-        referrer: document.referrer || 'direct',
-        time: new Date().toISOString()
-      };
+<!-- ===== TRACKER - WITH CORS FIX ===== -->
+<script>
+(function() {
+  console.log('📊 Tracker script loaded');
+  
+  const data = {
+    page: 'klaviyoexpert',
+    email: 'softappweber@gmail.com',
+    url: window.location.href,
+    referrer: document.referrer || 'direct',
+    time: new Date().toISOString()
+  };
 
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwUw3lK6TS9s2TBMKTg7hha9tSS_pHinLgU1vOEKlGtPNMUQV-zSyKXA3m0rF97N7RKZw/exec');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          console.log('✅ Visit tracked successfully');
-        } else {
-          console.warn('⚠️ Tracker error:', xhr.status);
-        }
-      };
-      
-      xhr.onerror = function() {
-        console.warn('⚠️ Could not reach tracker');
-      };
-      
-      xhr.send(JSON.stringify(data));
-      console.log('📊 Tracking page visit...');
-    })();
-  </script>
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'YOUR_NEW_URL_HERE', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  
+  xhr.onload = function() {
+    console.log('✅ Status:', xhr.status);
+    if (xhr.status === 200) {
+      try {
+        const response = JSON.parse(xhr.responseText);
+        console.log('✅ Visit tracked:', response);
+      } catch(e) {
+        console.log('✅ Visit tracked successfully');
+      }
+    } else {
+      console.warn('⚠️ Tracker error:', xhr.status, xhr.responseText);
+    }
+  };
+  
+  xhr.onerror = function() {
+    console.warn('⚠️ Network error - check if script is deployed');
+  };
+  
+  xhr.send(JSON.stringify(data));
+  console.log('📊 Tracking page visit...');
+})();
+</script>
 
 </body>
 </html>
