@@ -67,7 +67,7 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
  <!-- PASTE THIS ON YOUR WEBSITE for tracking and logging visits -->
 <script>
 (function() {
-  const PAGE_ID = 'klaviyoexpert-homepage';  // ← Simple ID, not full URL
+  const PAGE_ID = 'klaviyoexpert-homepage';
   const EMAIL = 'softappweber@gmail.com';
   
   const data = {
@@ -78,21 +78,28 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
     time: new Date().toISOString()
   };
 
-  // FIXED: Removed 'no-cors' mode
-  fetch('https://script.google.com/macros/s/AKfycbwPbRtH0SlpRWmeS2RtTgYJlhzp_-SoNiN-fbjfhdScFF3Dd2Nz4OZlOOu78amvCka9Kg/exec', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('✅ Visit tracked successfully:', data);
-  })
-  .catch(error => {
-    console.warn('⚠️ Tracker error:', error);
-  });
+  console.log('📊 Sending data:', data);
+
+  // Use XMLHttpRequest - most reliable
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'YOUR_DEPLOYED_URL_HERE', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  
+  xhr.onload = function() {
+    console.log('✅ Status:', xhr.status);
+    console.log('✅ Response:', xhr.responseText);
+    if (xhr.status === 200) {
+      console.log('✅ Visit tracked successfully');
+    } else {
+      console.warn('⚠️ Tracker error:', xhr.status);
+    }
+  };
+  
+  xhr.onerror = function() {
+    console.warn('⚠️ Could not reach tracker');
+  };
+  
+  xhr.send(JSON.stringify(data));
 })();
 </script>
 
