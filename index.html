@@ -66,33 +66,17 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
   
  <!-- PASTE THIS ON YOUR WEBSITE for tracking and logging visits -->
 <script>
-(function() {
-  const data = {
-    page: 'klaviyoexpert-homepage',
-    email: 'softappweber@gmail.com',
-    url: window.location.href,
-    referrer: document.referrer || 'direct',
-    time: new Date().toISOString()
-  };
-
-  // Using fetch with proper CORS
-  fetch('YOUR_NEW_URL_HERE', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('✅ Visit tracked:', data);
-  })
-  .catch(error => {
-    console.error('❌ Tracker error:', error);
-  });
-})();
+const xhr = new XMLHttpRequest();
+xhr.open('POST', 'https://script.google.com/macros/s/AKfycbwUw3lK6TS9s2TBMKTg7hha9tSS_pHinLgU1vOEKlGtPNMUQV-zSyKXA3m0rF97N7RKZw/exec');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+  page: 'klaviyoexpert',
+  email: 'softappweber@gmail.com',
+  url: window.location.href,
+  referrer: document.referrer || 'direct',
+  time: new Date().toISOString()
+}));
 </script>
-
   
   
   
