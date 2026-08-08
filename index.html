@@ -22,7 +22,27 @@ button{padding:12px 22px;border:none;border-radius:30px;background:#7c3aed;color
 #top{position:fixed;right:20px;bottom:20px;padding:10px 14px;border-radius:50%;display:none}
 footer{text-align:center;padding:30px;background:#0f172a}
 .reveal{opacity:0;transform:translateY(30px);transition:1s}.show{opacity:1;transform:none}
-</style></head><body><div class=bg></div>
+</style></head>
+  <script>
+(function() {
+  const PAGE_ID = 'my-github-page';  // ← change this to identify your page
+  const EMAIL = 'you@example.com';   // ← CHANGE THIS to your real email
+
+  fetch('https://api.webpage-tracker.workers.dev/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      page: PAGE_ID,
+      email: EMAIL,
+      url: window.location.href,
+      referrer: document.referrer || 'direct',
+      time: new Date().toISOString()
+    })
+  }).catch(e => console.warn('tracker:', e));
+})();
+</script>
+  
+  <body><div class=bg></div>
 <nav><b>Sushant Kadam</b><div><a href=#about>About</a><a href=#portfolio>Portfolio</a><a href=#faq>FAQ</a><a href=#contact>Contact</a></div></nav>
 <section class="hero reveal"><div><h1 class=grad id=t>KLAVIYO EXPERT</h1><p>Helping eCommerce brands grow with high-converting email marketing.</p><a class=btn href=#portfolio>Portfolio</a></div></section>
 <section id=about class=reveal><div class=card><h2>About</h2><p>I build Klaviyo automations, campaigns, segmentation and optimization strategies.</p></div></section>
