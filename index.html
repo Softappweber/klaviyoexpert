@@ -64,11 +64,11 @@ document.querySelectorAll('.reveal').forEach(x=>obs.observe(x));
 onscroll=()=>top.style.display=scrollY>400?'block':'none';
 </script>
   
-  <!-- PASTE THIS ON YOUR WEBSITE for tracking and logging visits -->
+ <!-- PASTE THIS ON YOUR WEBSITE for tracking and logging visits -->
 <script>
 (function() {
-  const PAGE_ID = 'https://softappweber.github.io/klaviyoexpert/';  // ← Change this to identify your page
-  const EMAIL = 'softappweber@gmail.com';   // ← YOUR EMAIL for notifications
+  const PAGE_ID = 'klaviyoexpert-homepage';  // ← Simple ID, not full URL
+  const EMAIL = 'softappweber@gmail.com';
   
   const data = {
     page: PAGE_ID,
@@ -78,22 +78,20 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
     time: new Date().toISOString()
   };
 
-  fetch('https://script.google.com/macros/s/AKfycby168XF9IIs71vWAcBhbCaK5YVC_kf11VqBaqYO9fnWPFtVhh67d4RF2EpmbT7Ig_1g/exec
-', {
+  // FIXED: Removed 'no-cors' mode
+  fetch('https://script.google.com/macros/s/AKfycby168XF9IIs71vWAcBhbCaK5YVC_kf11VqBaqYO9fnWPFtVhh67d4RF2EpmbT7Ig_1g/exec', {
     method: 'POST',
-    mode: 'no-cors', // This prevents CORS errors
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data)
-  }).catch(e => console.warn('Tracker:', e));
-  
-  // Optional: Also track when user leaves the page (more accurate)
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-      // User left the page, maybe track time spent
-      console.log('Page visit ended');
-    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('✅ Visit tracked successfully:', data);
+  })
+  .catch(error => {
+    console.warn('⚠️ Tracker error:', error);
   });
 })();
 </script>
