@@ -78,18 +78,13 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
     time: new Date().toISOString()
   };
 
-  console.log('📊 Sending data:', data);
-
-  // Use XMLHttpRequest - most reliable
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'YOUR_DEPLOYED_URL_HERE', true);
+  xhr.open('POST', 'YOUR_URL_HERE', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   
   xhr.onload = function() {
-    console.log('✅ Status:', xhr.status);
-    console.log('✅ Response:', xhr.responseText);
     if (xhr.status === 200) {
-      console.log('✅ Visit tracked successfully');
+      console.log('✅ Visit tracked');
     } else {
       console.warn('⚠️ Tracker error:', xhr.status);
     }
@@ -100,6 +95,7 @@ onscroll=()=>top.style.display=scrollY>400?'block':'none';
   };
   
   xhr.send(JSON.stringify(data));
+  console.log('📊 Tracking page visit...');
 })();
 </script>
 
